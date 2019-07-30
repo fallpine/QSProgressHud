@@ -99,7 +99,7 @@ class QSHud: NSObject {
             self.successImgName = successImg!
         }
         
-        if loadingImg != nil {
+        if errorImg != nil {
             self.errorImgName = errorImg!
         }
         
