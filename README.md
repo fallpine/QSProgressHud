@@ -2,6 +2,12 @@
 这是一个，加载、成功、失败、文字的提示框工具
 使用方法：直接用Pod导入，pod 'QSExtensions'
 
+先看下效果：
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading.png" width="200"/>
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/success.png" width="200"/>
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png" width="200"/>
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/infoText.png" width="200"/>
+
 ```
 /// 设置配置项
 ///
@@ -81,7 +87,3 @@ public class func qs_showInfo(toView: UIView? = nil,
 /// 消失
 public class func qs_dismiss()
 ```
-
-![image](https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png =200x300)
-
-<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png" width="375"/>
