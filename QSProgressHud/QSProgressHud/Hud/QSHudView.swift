@@ -74,7 +74,15 @@ class QSHudView: UIView {
         }
         
         if let imgName = img {
-            imgView.image = UIImage.init(named: imgName)
+            if imgName.hasPrefix("QSProgressHudBundle.bundle/") {
+                let name = imgName.replacingOccurrences(of: "QSProgressHudBundle.bundle/", with: "")
+                let path = Bundle(for: QSProgressHud.self).resourcePath! + "/QSProgressHudBundle.bundle"
+                let bundle = Bundle(path: path)!
+                let img1 = UIImage(named: name, in:  bundle, compatibleWith: nil)
+                imgView.image = img1
+            } else {
+                imgView.image = UIImage.init(named: imgName)
+            }
         }
         
         // 旋转动画
