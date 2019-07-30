@@ -82,4 +82,4 @@ public class func qs_showInfo(toView: UIView? = nil,
 public class func qs_dismiss()
 ```
 
-![image](https://github.com/fallpine/QSProgressHud/Screenshots/failure.png)
+![image](https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png)
