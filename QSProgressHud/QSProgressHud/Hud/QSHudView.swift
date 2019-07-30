@@ -74,8 +74,7 @@ class QSHudView: UIView {
         }
         
         if let imgName = img {
-//            imgView.image = UIImage.init(named: imgName)
-            imgView.image = UIImage.init(named: imgName, in: Bundle.main, compatibleWith: nil)
+            imgView.image = UIImage.init(named: imgName)
         }
         
         // 旋转动画

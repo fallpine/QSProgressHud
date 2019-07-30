@@ -16,12 +16,7 @@
 		0477032222EE9E2800A331FE /* QSHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477031F22EE9E2800A331FE /* QSHudView.swift */; };
 		0477032322EE9E2800A331FE /* QSDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477032022EE9E2800A331FE /* QSDispatch.swift */; };
 		0477032522EEAC5F00A331FE /* QSProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477032422EEAC5F00A331FE /* QSProgressHud.swift */; };
-		04AAB06322F023B000F51AA4 /* icon_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB05D22F023AF00F51AA4 /* icon_success@2x.png */; };
-		04AAB06422F023B000F51AA4 /* icon_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB05E22F023AF00F51AA4 /* icon_loading@2x.png */; };
-		04AAB06522F023B000F51AA4 /* icon_false@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB05F22F023B000F51AA4 /* icon_false@3x.png */; };
-		04AAB06622F023B000F51AA4 /* icon_success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB06022F023B000F51AA4 /* icon_success@3x.png */; };
-		04AAB06722F023B000F51AA4 /* icon_false@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB06122F023B000F51AA4 /* icon_false@2x.png */; };
-		04AAB06822F023B000F51AA4 /* icon_loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB06222F023B000F51AA4 /* icon_loading@3x.png */; };
+		04AAB06A22F0314C00F51AA4 /* QSProgressHudBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */; };
 		2D339BE9706D5A42BEE6E03E /* Pods_QSProgressHud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3558CBCFD45521EFB6C63D /* Pods_QSProgressHud.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,12 +32,7 @@
 		0477031F22EE9E2800A331FE /* QSHudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSHudView.swift; sourceTree = "<group>"; };
 		0477032022EE9E2800A331FE /* QSDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSDispatch.swift; sourceTree = "<group>"; };
 		0477032422EEAC5F00A331FE /* QSProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSProgressHud.swift; sourceTree = "<group>"; };
-		04AAB05D22F023AF00F51AA4 /* icon_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_success@2x.png"; sourceTree = "<group>"; };
-		04AAB05E22F023AF00F51AA4 /* icon_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_loading@2x.png"; sourceTree = "<group>"; };
-		04AAB05F22F023B000F51AA4 /* icon_false@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_false@3x.png"; sourceTree = "<group>"; };
-		04AAB06022F023B000F51AA4 /* icon_success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_success@3x.png"; sourceTree = "<group>"; };
-		04AAB06122F023B000F51AA4 /* icon_false@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_false@2x.png"; sourceTree = "<group>"; };
-		04AAB06222F023B000F51AA4 /* icon_loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_loading@3x.png"; sourceTree = "<group>"; };
+		04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = QSProgressHudBundle.bundle; sourceTree = "<group>"; };
 		1C3558CBCFD45521EFB6C63D /* Pods_QSProgressHud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSProgressHud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4A2FCA13FB3D23B16D75A0 /* Pods-QSProgressHud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSProgressHud.release.xcconfig"; path = "Target Support Files/Pods-QSProgressHud/Pods-QSProgressHud.release.xcconfig"; sourceTree = "<group>"; };
 		8A2AD0DB1813B35B8B7751AC /* Pods-QSProgressHud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSProgressHud.debug.xcconfig"; path = "Target Support Files/Pods-QSProgressHud/Pods-QSProgressHud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,26 +85,13 @@
 		0477031D22EE9DE900A331FE /* Hud */ = {
 			isa = PBXGroup;
 			children = (
-				04AAB05022F0237200F51AA4 /* Images */,
+				04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */,
 				0477032022EE9E2800A331FE /* QSDispatch.swift */,
 				0477031E22EE9E2800A331FE /* QSHud.swift */,
 				0477031F22EE9E2800A331FE /* QSHudView.swift */,
 				0477032422EEAC5F00A331FE /* QSProgressHud.swift */,
 			);
 			path = Hud;
-			sourceTree = "<group>";
-		};
-		04AAB05022F0237200F51AA4 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				04AAB06122F023B000F51AA4 /* icon_false@2x.png */,
-				04AAB05F22F023B000F51AA4 /* icon_false@3x.png */,
-				04AAB05E22F023AF00F51AA4 /* icon_loading@2x.png */,
-				04AAB06222F023B000F51AA4 /* icon_loading@3x.png */,
-				04AAB05D22F023AF00F51AA4 /* icon_success@2x.png */,
-				04AAB06022F023B000F51AA4 /* icon_success@3x.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		5E8DFE6E031E15F18A1A3597 /* Frameworks */ = {
@@ -194,13 +171,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AAB06822F023B000F51AA4 /* icon_loading@3x.png in Resources */,
 				0477031622EE9DE200A331FE /* LaunchScreen.storyboard in Resources */,
-				04AAB06722F023B000F51AA4 /* icon_false@2x.png in Resources */,
-				04AAB06322F023B000F51AA4 /* icon_success@2x.png in Resources */,
-				04AAB06622F023B000F51AA4 /* icon_success@3x.png in Resources */,
-				04AAB06522F023B000F51AA4 /* icon_false@3x.png in Resources */,
-				04AAB06422F023B000F51AA4 /* icon_loading@2x.png in Resources */,
+				04AAB06A22F0314C00F51AA4 /* QSProgressHudBundle.bundle in Resources */,
 				0477031322EE9DE200A331FE /* Assets.xcassets in Resources */,
 				0477031122EE9DE100A331FE /* Main.storyboard in Resources */,
 			);

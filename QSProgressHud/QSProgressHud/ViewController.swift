@@ -67,8 +67,8 @@ class ViewController: UIViewController {
         
         view.addSubview(dismissBtn)
         dismissBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(infoBtn.snp.bottom).offset(35.0)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(-120.0)
         }
         
         dismissBtn.addTarget(self, action: #selector(self.dismissView), for: .touchUpInside)
