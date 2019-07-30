@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "QSProgressHud"
-spec.version      = "0.0.1"
+spec.version      = "0.0.2"
 spec.summary      = "提示框。"
 
 # This description is used to generate tags and improve search results.
@@ -24,10 +24,9 @@ spec.summary      = "提示框。"
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
-spec.description  = <<-DESC
-DESC
+spec.description  = "加载、成功、失败、文字提示框！"
 
-spec.homepage     = "https://github.com/fallpine/QSProgressHud"
+spec.homepage     = "https://www.jianshu.com/u/7be4a0163a7f"
 # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -79,7 +78,7 @@ spec.platform     = :ios, "8.0"
 #  Supports git, hg, bzr, svn and HTTP.
 #
 
-spec.source       = { :git => "https://github.com/fallpine/QSProgressHud.git", :tag => "#{0.0.1}" }
+spec.source       = { :git => "https://github.com/fallpine/QSProgressHud.git", :tag => "0.0.2" }
 
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -106,9 +105,6 @@ spec.source_files  = "QSProgressHud", "QSProgressHud/QSProgressHud/Hud/**/*.{swi
 
 # spec.resource  = "icon.png"
 # spec.resources = "Resources/*.png"
-spec.resource_bundles = {
-    'QSProgressHud' => ['QSProgressHud/Assets/Hud/*']
-}
 
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
@@ -136,5 +132,8 @@ spec.resource_bundles = {
 
 # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 # spec.dependency "JSONKit", "~> 1.4"
+spec.dependency "SnapKit"
+
+spec.swift_version = '4.2'
 
 end
