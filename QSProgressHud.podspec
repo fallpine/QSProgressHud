@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "QSProgressHud"
-spec.version      = "0.0.2"
+spec.version      = "0.0.4"
 spec.summary      = "提示框。"
 
 # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ spec.platform     = :ios, "8.0"
 #  Supports git, hg, bzr, svn and HTTP.
 #
 
-spec.source       = { :git => "https://github.com/fallpine/QSProgressHud.git", :tag => "0.0.2" }
+spec.source       = { :git => "https://github.com/fallpine/QSProgressHud.git", :tag => "0.0.4" }
 
 
 # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -105,8 +105,6 @@ spec.source_files  = "QSProgressHud", "QSProgressHud/QSProgressHud/Hud/**/*.{swi
 
 # spec.resource  = "icon.png"
 # spec.resources = "Resources/*.png"
-
-# spec.resources = "QSProgressHud/QSProgressHud/QSProgressHud/Hud/Images/*.png"
 
 spec.resource_bundles = {
     'QSProgressHud' => ['QSProgressHud/QSProgressHud/Hud/Images/*.png']

@@ -31,11 +31,11 @@ class QSHud: NSObject {
     // 吐司消失时间
     private var dismissInterval: TimeInterval = 2.5
     // 加载中图片
-    private var loadingImgName: String = "QSProgressHudBundle.bundle/icon_loading"
+    private var loadingImgName: String = "icon_loading"
     // 成功图片
-    private var successImgName: String = "QSProgressHudBundle.bundle/icon_success"
+    private var successImgName: String = "icon_success"
     // 失败图片
-    private var errorImgName: String = "QSProgressHudBundle.bundle/icon_false"
+    private var errorImgName: String = "icon_false"
     
     // 消失完成时的回调
     private var hudDismissComplete: (() -> ())?
