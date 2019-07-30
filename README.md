@@ -83,3 +83,5 @@ public class func qs_dismiss()
 ```
 
 ![image](https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png =200x300)
+
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png" width="375"/>
