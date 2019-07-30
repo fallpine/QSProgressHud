@@ -4,6 +4,7 @@
 
 先看下效果：
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading.png" width="200"/>
+<img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading1.png" width="200"/>
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/success.png" width="200"/>
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png" width="200"/>
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/infoText.png" width="200"/>
