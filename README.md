@@ -1,8 +1,10 @@
 # QSProgressHud
 这是一个，加载、成功、失败、文字的提示框工具
+
 使用方法：直接用Pod导入，pod 'QSExtensions'
 
 先看下效果：
+
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading.png" width="200"/>
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading1.png" width="200"/>
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/success.png" width="200"/>
