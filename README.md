@@ -81,3 +81,5 @@ public class func qs_showInfo(toView: UIView? = nil,
 /// 消失
 public class func qs_dismiss()
 ```
+
+![image](https://github.com/fallpine/QSProgressHud/Screenshots/failure.png)
