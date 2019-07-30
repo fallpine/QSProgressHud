@@ -21,7 +21,7 @@ public class QSProgressHud {
     ///   - successImg: 成功图片
     ///   - errorImg: 失败图片
     ///   - dismissInterval: 多久消失
-    class func qs_setConfiguration(maskLayerColor: UIColor? = nil,
+    public class func qs_setConfiguration(maskLayerColor: UIColor? = nil,
                                    toastViewColor: UIColor? = nil,
                                    toastViewRadius:  CGFloat? = nil,
                                    titleColor: UIColor? = nil,
@@ -47,7 +47,7 @@ public class QSProgressHud {
     ///   - toView: 吐司加到哪个view上，nil加到window
     ///   - title: 标题
     ///   - isNeedMaskLayer: 是否需要遮罩
-    class func qs_showProgress(toView: UIView? = nil,
+    public class func qs_showProgress(toView: UIView? = nil,
                                title: String? = nil,
                                isNeedMaskLayer: Bool = true) {
         QSHud.shared.qs_showProgress(title: title, toView: toView, isNeedMaskLayer: isNeedMaskLayer)
@@ -61,7 +61,7 @@ public class QSProgressHud {
     ///   - isNeedMaskLayer: 是否需要遮罩
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
-    class func qs_showSuccess(toView: UIView? = nil,
+    public class func qs_showSuccess(toView: UIView? = nil,
                         title: String? = nil,
                         isNeedMaskLayer: Bool = true,
                         dismissInterval: TimeInterval = 2.5,
@@ -77,7 +77,7 @@ public class QSProgressHud {
     ///   - isNeedMaskLayer: 是否需要遮罩
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
-    class func qs_showFailure(toView: UIView? = nil,
+    public class func qs_showFailure(toView: UIView? = nil,
                       title: String? = nil,
                       isNeedMaskLayer: Bool = true,
                       dismissInterval: TimeInterval = 2.5,
@@ -93,7 +93,7 @@ public class QSProgressHud {
     ///   - isNeedMaskLayer: 是否需要遮罩
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
-    class func qs_showInfo(toView: UIView? = nil,
+    public class func qs_showInfo(toView: UIView? = nil,
                      title: String,
                      isNeedMaskLayer: Bool = true,
                      dismissInterval: TimeInterval = 2.5,
@@ -102,7 +102,7 @@ public class QSProgressHud {
     }
     
     /// 消失
-    class func qs_dismiss() {
+    public class func qs_dismiss() {
         QSHud.shared.qs_dismiss()
     }
 }

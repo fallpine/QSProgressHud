@@ -106,6 +106,12 @@ spec.source_files  = "QSProgressHud", "QSProgressHud/QSProgressHud/Hud/**/*.{swi
 # spec.resource  = "icon.png"
 # spec.resources = "Resources/*.png"
 
+# spec.resources = "QSProgressHud/QSProgressHud/QSProgressHud/Hud/Images/*.png"
+
+spec.resource_bundles = {
+    'QSProgressHud' => ['QSProgressHud/QSProgressHud/Hud/Images/*.png']
+}
+
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 
