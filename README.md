@@ -1,7 +1,7 @@
 # QSProgressHud
 这是一个，加载、成功、失败、文字的提示框工具
 
-使用方法：直接用Pod导入，pod 'QSExtensions'
+使用方法：直接用Pod导入，pod 'QSProgressHud'
 
 先看下效果：
 
