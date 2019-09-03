@@ -119,7 +119,7 @@ class QSHud: NSObject {
             qs_dismiss()
         }
         
-        // 应用计数加一
+        // 引用计数加一
         showCount += 1
         if hudType == .progress && showCount > 1 {
             return
@@ -195,7 +195,7 @@ class QSHud: NSObject {
     /// 消失
     func qs_dismiss(complete: (() -> ())? = nil) {
         if hudType == .progress && showCount > 1 {
-            // 应用计数减一
+            // 引用计数减一
             showCount -= 1
             
             return
@@ -219,7 +219,7 @@ class QSHud: NSObject {
                     self?.hudView = nil
                 }
                 
-                // 应用计数清零
+                // 引用计数清零
                 self?.showCount = 0
                 if let block = complete {
                     block()
