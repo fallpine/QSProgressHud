@@ -139,6 +139,7 @@ class QSHud: NSObject {
     ///   - dismissComplete: 消失后回调
     func qs_showSuccess(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
         hudType = .success
+        qs_dismiss()
         
         qs_addHudView(toView: toView, img: QSHud.shared.successImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
@@ -160,6 +161,7 @@ class QSHud: NSObject {
     ///   - dismissComplete: 消失后回调
     func qs_showError(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
         hudType = .failure
+        qs_dismiss()
         
         qs_addHudView(toView: toView, img: errorImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
@@ -181,6 +183,7 @@ class QSHud: NSObject {
     ///   - dismissComplete: 消失后回调
     func qs_showText(title: String, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
         hudType = .info
+        qs_dismiss()
         
         qs_addHudView(toView: toView, img: nil, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
