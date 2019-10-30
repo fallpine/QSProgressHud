@@ -9,46 +9,7 @@
 import UIKit
 import SnapKit
 
-enum QSHudType {
-    case progress
-    case success
-    case failure
-    case info
-}
-
 class QSHud: NSObject {
-    /// 配置项
-    // 遮罩颜色
-    private var maskLayerColor: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-    // 吐司背景颜色
-    private var toastViewColor: UIColor = UIColor.white
-    // 吐司的圆角
-    private var toastViewRadius: CGFloat = 10.0
-    // title字体颜色
-    private var titleColor: UIColor = UIColor.black
-    // title字体大小
-    private var titleFont: UIFont = UIFont.systemFont(ofSize: 17.0)
-    // 吐司消失时间
-    private var dismissInterval: TimeInterval = 2.5
-    // 加载中图片
-    private var loadingImgName: String = "QSProgressHudBundle.bundle/icon_loading"
-    // 成功图片
-    private var successImgName: String = "QSProgressHudBundle.bundle/icon_success"
-    // 失败图片
-    private var errorImgName: String = "QSProgressHudBundle.bundle/icon_false"
-    
-    // 消失完成时的回调
-    private var hudDismissComplete: (() -> ())?
-    private var dismissTask: QSTask?
-    
-    // hudView
-    private var hudView: QSHudView?
-    
-    // 引用计数
-    private var showCount: Int = 0
-    // 显示hud类型
-    private var hudType: QSHudType = .progress
-    
     // 单例
     static var shared: QSHud {
         struct Static {
@@ -115,17 +76,8 @@ class QSHud: NSObject {
     ///   - toView: 吐司加到哪个view上，nil加到window
     ///   - isNeedMaskLayer: 是否需要遮罩
     func qs_showProgress(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true) {
-        if hudType != .progress && hudView != nil {
-            qs_dismiss()
-        }
-        
         // 引用计数加一
         showCount += 1
-        if hudType == .progress && showCount > 1 {
-            return
-        }
-        
-        hudType = .progress
         qs_addHudView(toView: toView, img: QSHud.shared.loadingImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: true, dismissComplete: nil)
     }
     
@@ -138,15 +90,14 @@ class QSHud: NSObject {
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
     func qs_showSuccess(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
-        hudType = .success
-        qs_dismiss()
-        
+        // 引用计数加一
+        showCount += 1
         qs_addHudView(toView: toView, img: QSHud.shared.successImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
         // 自动消失
         if dismissInterval > 0.0 {
             dismissTask = QSDispatch.qs_delay(dismissInterval) { [weak self] in
-                self?.qs_dismiss()
+                self?.qs_dismiss(complete: dismissComplete)
             }
         }
     }
@@ -160,15 +111,14 @@ class QSHud: NSObject {
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
     func qs_showError(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
-        hudType = .failure
-        qs_dismiss()
-        
+        // 引用计数加一
+        showCount += 1
         qs_addHudView(toView: toView, img: errorImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
         // 自动消失
         if dismissInterval > 0.0 {
             dismissTask = QSDispatch.qs_delay(dismissInterval) { [weak self] in
-                self?.qs_dismiss()
+                self?.qs_dismiss(complete: dismissComplete)
             }
         }
     }
@@ -182,25 +132,25 @@ class QSHud: NSObject {
     ///   - dismissInterval: 消失时间，默认2.5秒
     ///   - dismissComplete: 消失后回调
     func qs_showText(title: String, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
-        hudType = .info
-        qs_dismiss()
-        
+        // 引用计数加一
+        showCount += 1
         qs_addHudView(toView: toView, img: nil, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
         
         // 自动消失
         if dismissInterval > 0.0 {
             dismissTask = QSDispatch.qs_delay(dismissInterval) { [weak self] in
-                self?.qs_dismiss()
+                self?.qs_dismiss(complete: dismissComplete)
             }
         }
     }
     
     /// 消失
     func qs_dismiss(complete: (() -> ())? = nil) {
-        if hudType == .progress && showCount > 1 {
-            // 引用计数减一
-            showCount -= 1
-            
+        showCount -= 1
+        if showCount > 0 {
+            if let block = complete {
+                block()
+            }
             return
         }
         
@@ -208,48 +158,32 @@ class QSHud: NSObject {
             QSDispatch.qs_cancle(dismissTask)
         }
         
-        if let hudView = hudView {
-            UIView.animate(withDuration: 0.35, animations: {
-                hudView.alpha = 0.0
-            }) { [weak self] _ in
-                if let block = self?.hudDismissComplete {
-                    block()
-                }
-                
-                hudView.removeFromSuperview()
-                
-                if self?.showCount == 0 {
-                    self?.hudView = nil
-                }
-                
-                // 引用计数清零
-                self?.showCount = 0
-                if let block = complete {
-                    block()
-                }
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.hudView.alpha = 0.0
+        }) { [weak self] _ in
+            if let block = complete {
+                block()
             }
+            self?.hudView.removeFromSuperview()
+            self?.showCount = 0
         }
     }
     
     // MARK: - Private Methods
     private func qs_addHudView(toView: UIView? = nil, img: String? = nil, title: String? = nil, isNeedMaskLayer: Bool, isImgRotate: Bool, dismissComplete: (() -> ())? = nil) {
-        if hudView != nil {
-            qs_dismiss { [unowned self] in
-                self.hudView = QSHudView.init(toastViewColor: self.toastViewColor, toastViewRadius: self.toastViewRadius, img: img, title: title, titleFont: self.titleFont, titleColor: self.titleColor, isImgRotate: isImgRotate, isNeedMaskLayer: isNeedMaskLayer, complete: dismissComplete)
-                
-                // 消失回调
-                self.hudDismissComplete = dismissComplete
-                // 布局
-                self.layoutHudView(self.hudView, toView: toView, isNeedMaskLayer: isNeedMaskLayer)
-            }
-        } else {
-            hudView = QSHudView.init(toastViewColor: toastViewColor, toastViewRadius: toastViewRadius, img: img, title: title, titleFont: titleFont, titleColor: titleColor, isImgRotate: isImgRotate, isNeedMaskLayer: isNeedMaskLayer, complete: dismissComplete)
-            
-            // 消失回调
-            hudDismissComplete = dismissComplete
-            // 布局
-            layoutHudView(hudView, toView: toView, isNeedMaskLayer: isNeedMaskLayer)
-        }
+        hudView.isNeedMaskLayer = isNeedMaskLayer
+        hudView.toastColor = toastViewColor
+        hudView.toastRadius = toastViewRadius
+        hudView.iconImg = img ?? ""
+        hudView.title = title ?? ""
+        hudView.titleFont = titleFont
+        hudView.titleColor = titleColor
+        hudView.isImgRotate = isImgRotate
+        
+        // 消失回调
+        hudDismissComplete = dismissComplete
+        // 布局
+        layoutHudView(hudView, toView: toView, isNeedMaskLayer: isNeedMaskLayer)
     }
     
     /// 布局HudView
@@ -264,7 +198,7 @@ class QSHud: NSObject {
                 theView = toView!
             }
             
-            theView.addSubview(hudView!)
+            theView.addSubview(hudView)
             hudV.snp.makeConstraints { (make) in
                 if isNeedMaskLayer {
                     make.edges.equalTo(UIEdgeInsets.zero)
@@ -289,4 +223,42 @@ class QSHud: NSObject {
             hudView.alpha = 1.0
         })
     }
+    
+    // MARK: - Property
+    /// 配置项
+    // 遮罩颜色
+    private var maskLayerColor: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+    // 吐司背景颜色
+    private var toastViewColor: UIColor = UIColor.white
+    // 吐司的圆角
+    private var toastViewRadius: CGFloat = 10.0
+    // title字体颜色
+    private var titleColor: UIColor = UIColor.black
+    // title字体大小
+    private var titleFont: UIFont = UIFont.systemFont(ofSize: 17.0)
+    // 吐司消失时间
+    private var dismissInterval: TimeInterval = 2.5
+    // 加载中图片
+    private var loadingImgName: String = "QSProgressHudBundle.bundle/icon_loading"
+    // 成功图片
+    private var successImgName: String = "QSProgressHudBundle.bundle/icon_success"
+    // 失败图片
+    private var errorImgName: String = "QSProgressHudBundle.bundle/icon_false"
+    
+    // 消失完成时的回调
+    private var hudDismissComplete: (() -> ())?
+    private var dismissTask: QSTask?
+    
+    // hudView
+    private lazy var hudView: QSHudView = {
+        let view = QSHudView.init(frame: .zero)
+        view.toastColor = toastViewColor
+        view.toastRadius = toastViewRadius
+        view.titleColor = titleColor
+        view.titleFont = titleFont
+        return view
+    }()
+    
+    // 引用计数
+    private var showCount: Int = 0
 }

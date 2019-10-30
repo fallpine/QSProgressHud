@@ -9,118 +9,46 @@
 import UIKit
 
 class QSHudView: UIView {
-    /// 子控件
-    private var imgView: UIImageView!
-    
-    /// 初始化
-    ///
-    /// - Parameters:
-    ///   - toastViewColor: 吐司颜色
-    ///   - toastViewRadius: 吐司圆角
-    ///   - img: 图片名（暂时仅支持本地图片）
-    ///   - title: 文字提示
-    ///   - titleFont: 文字提示字体
-    ///   - titleColor: 文字提示颜色
-    ///   - isImgRotate: 是否旋转图片
-    ///   - isNeedMaskLayer: 是否需要遮罩层
-    ///   - complete: 显示完成回调
-    convenience init(toastViewColor: UIColor, toastViewRadius: CGFloat?, img: String?, title: String?, titleFont: UIFont, titleColor: UIColor, isImgRotate: Bool, isNeedMaskLayer: Bool, complete: (() -> ())?) {
-        self.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        // toastView
-        let toastView = UIView.init()
+        self.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         self.addSubview(toastView)
         toastView.snp.makeConstraints { (make) in
-            if isNeedMaskLayer {
-                make.center.equalTo(self)
-                make.top.left.greaterThanOrEqualTo(50.0)
-                make.right.bottom.lessThanOrEqualTo(-50.0)
-            } else {
-                make.edges.equalTo(UIEdgeInsets.zero)
-            }
-            
-            if let tit = title {
-                if !tit.isEmpty {
-                    make.width.greaterThanOrEqualTo(180.0)
-                }
-            }
+            make.center.equalTo(self)
+            make.top.left.greaterThanOrEqualTo(50.0)
+            make.right.bottom.lessThanOrEqualTo(-50.0)
         }
         
-        if isNeedMaskLayer {
-            toastView.backgroundColor = toastViewColor
-        } else {
-            toastView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        }
-        
-        if let radius = toastViewRadius {
-            toastView.layer.cornerRadius = radius
-            toastView.layer.masksToBounds = true
-        }
-        
-        // imgView
-        imgView = UIImageView.init()
         toastView.addSubview(imgView)
         imgView.snp.makeConstraints { (make) in
             make.top.equalTo(15.0)
-            make.centerX.equalTo(toastView)
+            make.centerX.equalToSuperview()
             make.left.greaterThanOrEqualTo(15.0)
             make.right.lessThanOrEqualTo(-15.0)
-            
-            if let tit = title {
-                if tit.isEmpty {
-                    make.bottom.equalTo(-15.0)
-                }
-            }
+            make.bottom.lessThanOrEqualTo(-15.0)
         }
         
-        if let imgName = img {
-            if imgName.hasPrefix("QSProgressHudBundle.bundle/") {
-                let name = imgName.replacingOccurrences(of: "QSProgressHudBundle.bundle/", with: "")
-                let path = Bundle(for: QSProgressHud.self).resourcePath! + "/QSProgressHudBundle.bundle"
-                let bundle = Bundle(path: path)!
-                let img1 = UIImage(named: name, in:  bundle, compatibleWith: nil)
-                imgView.image = img1
-            } else {
-                imgView.image = UIImage.init(named: imgName)
-            }
-        }
-        
-        // 旋转动画
-        if isImgRotate {
-            self.qs_addRotationAnimation(toView: imgView)
-        }
-        
-        // titleLab
-        let titleLab = UILabel.init()
         toastView.addSubview(titleLab)
         titleLab.snp.makeConstraints { (make) in
-            if img != nil {
-                if title == nil {
-                    make.top.equalTo(imgView.snp.bottom)
-                } else {
-                    make.top.equalTo(imgView.snp.bottom).offset(20.0)
-                }
-            } else {
-                make.top.equalTo(15.0)
-            }
             make.left.equalTo(15.0)
             make.right.bottom.equalTo(-15.0)
+            make.top.equalTo(imgView.snp_bottom).offset(15.0)
         }
-        
-        titleLab.font = titleFont
-        if isNeedMaskLayer {
-            titleLab.textColor = titleColor
-        } else {
-            titleLab.textColor = UIColor.white
-        }
-        titleLab.numberOfLines = 0
-        titleLab.textAlignment = .center
-        titleLab.text = title
     }
     
-    // MARK: - Private Methods
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("deinit")
+        self.imgView.layer.removeAnimation(forKey: "transform.rotation.z")
+    }
+    
+    // MARK: - Func
     /// 旋转动画
-    private func qs_addRotationAnimation(toView: UIView) {
+    private func qs_addRotationAnimation(to view: UIView) {
         // 创建动画
         let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
         
@@ -133,18 +61,150 @@ class QSHudView: UIView {
         rotationAnim.isRemovedOnCompletion = false
         
         // 将动画添加到layer中
-        toView.layer.add(rotationAnim, forKey: nil)
+        view.layer.add(rotationAnim, forKey: nil)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    /// 停止旋转
+    private func qs_stopRotationAnimation(in view: UIView) {
+        view.layer.removeAllAnimations()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    // MARK: - Property
+    // 是否需要遮罩
+    var isNeedMaskLayer: Bool = true {
+        didSet {
+            toastView.snp.remakeConstraints { (make) in
+                if isNeedMaskLayer {
+                    make.center.equalTo(self)
+                    make.top.left.greaterThanOrEqualTo(50.0)
+                    make.right.bottom.lessThanOrEqualTo(-50.0)
+                } else {
+                    make.edges.equalToSuperview()
+                }
+            }
+            
+            if !isNeedMaskLayer {
+                self.layer.cornerRadius = toastRadius
+                self.layer.masksToBounds = true
+            } else {
+                self.layer.cornerRadius = 0.0
+                self.layer.masksToBounds = true
+            }
+        }
     }
     
-    deinit {
-        self.imgView.layer.removeAnimation(forKey: "transform.rotation.z")
+    // 吐司颜色
+    var toastColor: UIColor = .white {
+        didSet {
+            toastView.backgroundColor = toastColor
+        }
     }
+    
+    // 吐司圆角
+    var toastRadius: CGFloat = 0.0 {
+        didSet {
+            toastView.layer.cornerRadius = toastRadius
+            toastView.layer.masksToBounds = true
+            
+            if !isNeedMaskLayer {
+                self.layer.cornerRadius = toastRadius
+                self.layer.masksToBounds = true
+            } else {
+                self.layer.cornerRadius = 0.0
+                self.layer.masksToBounds = true
+            }
+        }
+    }
+    
+    // 文字内容
+    var title: String = "" {
+        didSet {
+            titleLab.text = title
+            
+            titleLab.snp.updateConstraints { (make) in
+                if title.isEmpty {
+                    make.top.equalTo(imgView.snp_bottom).offset(0.0)
+                } else {
+                    make.top.equalTo(imgView.snp_bottom).offset(15.0)
+                }
+            }
+        }
+    }
+    
+    // title字体颜色
+    var titleColor: UIColor = UIColor.black {
+        didSet {
+            titleLab.textColor = titleColor
+        }
+    }
+    
+    // title字体大小
+    var titleFont: UIFont = UIFont.systemFont(ofSize: 17.0) {
+        didSet {
+            titleLab.font = titleFont
+        }
+    }
+    
+    // 图片(仅支持本地图片)
+    var iconImg: String = "" {
+        didSet {
+            if iconImg.hasPrefix("QSProgressHudBundle.bundle/") {
+                let name = iconImg.replacingOccurrences(of: "QSProgressHudBundle.bundle/", with: "")
+                let path = Bundle(for: QSProgressHud.self).resourcePath! + "/QSProgressHudBundle.bundle"
+                let bundle = Bundle(path: path)!
+                let img1 = UIImage(named: name, in:  bundle, compatibleWith: nil)
+                imgView.image = img1
+            } else {
+                imgView.image = UIImage.init(named: iconImg)
+            }
+            
+            imgView.snp.remakeConstraints { (make) in
+                if iconImg.isEmpty {
+                    make.top.equalToSuperview()
+                    make.centerX.equalToSuperview()
+                    make.left.greaterThanOrEqualTo(15.0)
+                    make.right.lessThanOrEqualTo(-15.0)
+                    make.bottom.lessThanOrEqualTo(-15.0)
+                    make.height.equalTo(0.0)
+                } else {
+                    make.top.equalTo(15.0)
+                    make.centerX.equalToSuperview()
+                    make.left.greaterThanOrEqualTo(15.0)
+                    make.right.lessThanOrEqualTo(-15.0)
+                    make.bottom.lessThanOrEqualTo(-15.0)
+                }
+            }
+        }
+    }
+    
+    // 图片是否旋转
+    var isImgRotate: Bool = false {
+        didSet {
+            if isImgRotate {
+                self.qs_addRotationAnimation(to: imgView)
+            } else {
+                self.qs_stopRotationAnimation(in: imgView)
+            }
+        }
+    }
+    
+    // MARK: - Widget
+    private lazy var toastView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var imgView: UIImageView = {
+        let imgV = UIImageView.init()
+        return imgV
+    }()
+    
+    private lazy var titleLab: UILabel = {
+        let lab = UILabel.init()
+        lab.textColor = titleColor
+        lab.font = titleFont
+        lab.textAlignment = .center
+        return lab
+    }()
 }
