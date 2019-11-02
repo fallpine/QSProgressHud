@@ -19,80 +19,82 @@ class QSHud: NSObject {
     }
     
     // MARK: - Func
-    /// 设置配置项
-    ///
-    /// - Parameters:
-    ///   - maskLayerColor: 遮罩层颜色
-    ///   - toastViewColor: 吐司颜色
-    ///   - toastViewRadius: 吐司圆角
-    ///   - titleColor: title颜色
-    ///   - titleFont: title字体
-    ///   - loadingImg: 加载中图片
-    ///   - successImg: 成功图片
-    ///   - errorImg: 失败图片
-    ///   - dismissInterval: 多久消失
-    func qs_setConfigurationItems(maskLayerColor: UIColor? = nil, toastViewColor: UIColor? = nil, toastViewRadius: CGFloat? = nil, titleColor: UIColor? = nil, titleFont: UIFont? = nil, loadingImg: String? = nil, successImg: String? = nil, errorImg: String? = nil, dismissInterval: TimeInterval? = nil) {
-        if maskLayerColor != nil {
-            self.maskLayerColor = maskLayerColor!
-        }
-        
-        if toastViewColor != nil {
-            self.toastViewColor = toastViewColor!
-        }
-        
-        if toastViewRadius != nil {
-            self.toastViewRadius = toastViewRadius!
-        }
-        
-        if titleColor != nil {
-            self.titleColor = titleColor!
-        }
-        
-        if titleFont != nil {
-            self.titleFont = titleFont!
-        }
-        
-        if loadingImg != nil {
-            self.loadingImgName = loadingImg!
-        }
-        
-        if successImg != nil {
-            self.successImgName = successImg!
-        }
-        
-        if errorImg != nil {
-            self.errorImgName = errorImg!
-        }
-        
-        if dismissInterval != nil {
-            self.dismissInterval = dismissInterval!
-        }
-    }
-    
     /// 加载中
     ///
     /// - Parameters:
-    ///   - title: 标题
     ///   - toView: 吐司加到哪个view上，nil加到window
+    ///   - title: 标题
+    ///   - loadingImg: 加载中图片
     ///   - isNeedMaskLayer: 是否需要遮罩
-    func qs_showProgress(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true) {
+    ///   - maskLayerColor: 遮罩层颜色
+    ///   - toastViewColor: 吐司颜色
+    ///   - toastViewRadius: 吐司圆角
+    ///   - titleColor: 标题颜色
+    ///   - titleFont: 标题字体
+    func qs_showProgress(toView: UIView? = nil,
+                         title: String? = nil,
+                         loadingImg: String? = nil,
+                         isNeedMaskLayer: Bool = true,
+                         maskLayerColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                         toastViewColor: UIColor = .white,
+                         toastViewRadius: CGFloat = 10.0,
+                         titleColor: UIColor = .black,
+                         titleFont: UIFont = UIFont.systemFont(ofSize: 17.0)) {
+        let img = loadingImg == nil ? loadingImgName : loadingImg
+        
         // 引用计数加一
         showCount += 1
-        qs_addHudView(toView: toView, img: QSHud.shared.loadingImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: true, dismissComplete: nil)
+        qs_addHudView(toView: toView,
+                      img: img,
+                      title: title,
+                      isNeedMaskLayer: isNeedMaskLayer,
+                      isImgRotate: true,
+                      maskLayerColor: maskLayerColor,
+                      toastViewColor: toastViewColor,
+                      toastViewRadius: toastViewRadius,
+                      titleColor: titleColor,
+                      titleFont: titleFont)
     }
     
     /// 成功
     ///
     /// - Parameters:
-    ///   - title: 标题
     ///   - toView: 吐司加到哪个view上，nil加到window
+    ///   - title: 标题
+    ///   - successImg: 成功图片
     ///   - isNeedMaskLayer: 是否需要遮罩
-    ///   - dismissInterval: 消失时间，默认2.5秒
+    ///   - maskLayerColor: 遮罩颜色
+    ///   - toastViewColor: 吐司颜色
+    ///   - toastViewRadius: 吐司圆角
+    ///   - titleColor: 标题颜色
+    ///   - titleFont: 标题字体
+    ///   - dismissInterval: 消失时间
     ///   - dismissComplete: 消失后回调
-    func qs_showSuccess(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
+    func qs_showSuccess(toView: UIView? = nil,
+                        title: String? = nil,
+                        successImg: String? = nil,
+                        isNeedMaskLayer: Bool = true,
+                        maskLayerColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                        toastViewColor: UIColor = .white,
+                        toastViewRadius: CGFloat = 10.0,
+                        titleColor: UIColor = .black,
+                        titleFont: UIFont = UIFont.systemFont(ofSize: 17.0),
+                        dismissInterval: TimeInterval = 2.5,
+                        dismissComplete: (() -> ())? = nil) {
+        let img = successImg == nil ? successImgName : successImg
+        
         // 引用计数加一
         showCount += 1
-        qs_addHudView(toView: toView, img: QSHud.shared.successImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
+        qs_addHudView(toView: toView,
+                      img: img,
+                      title: title,
+                      isNeedMaskLayer: isNeedMaskLayer,
+                      isImgRotate: false,
+                      maskLayerColor: maskLayerColor,
+                      toastViewColor: toastViewColor,
+                      toastViewRadius: toastViewRadius,
+                      titleColor: titleColor,
+                      titleFont: titleFont)
         
         // 自动消失
         if dismissInterval > 0.0 {
@@ -105,15 +107,42 @@ class QSHud: NSObject {
     /// 失败
     ///
     /// - Parameters:
-    ///   - title: 标题
     ///   - toView: 吐司加到哪个view上，nil加到window
+    ///   - title: 标题
+    ///   - errorImg: 错误图片
     ///   - isNeedMaskLayer: 是否需要遮罩
-    ///   - dismissInterval: 消失时间，默认2.5秒
+    ///   - maskLayerColor: 遮罩颜色
+    ///   - toastViewColor: 吐司颜色
+    ///   - toastViewRadius: 吐司圆角
+    ///   - titleColor: 标题颜色
+    ///   - titleFont: 标题字体
+    ///   - dismissInterval: 消失时间
     ///   - dismissComplete: 消失后回调
-    func qs_showError(title: String? = nil, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
+    func qs_showError(toView: UIView? = nil,
+                      title: String? = nil,
+                      errorImg: String? = nil,
+                      isNeedMaskLayer: Bool = true,
+                      maskLayerColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                      toastViewColor: UIColor = .white,
+                      toastViewRadius: CGFloat = 10.0,
+                      titleColor: UIColor = .black,
+                      titleFont: UIFont = UIFont.systemFont(ofSize: 17.0),
+                      dismissInterval: TimeInterval = 2.5,
+                      dismissComplete: (() -> ())? = nil) {
+        let img = errorImg == nil ? errorImgName : errorImg
+        
         // 引用计数加一
         showCount += 1
-        qs_addHudView(toView: toView, img: errorImgName, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
+        qs_addHudView(toView: toView,
+                      img: img,
+                      title: title,
+                      isNeedMaskLayer: isNeedMaskLayer,
+                      isImgRotate: false,
+                      maskLayerColor: maskLayerColor,
+                      toastViewColor: toastViewColor,
+                      toastViewRadius: toastViewRadius,
+                      titleColor: titleColor,
+                      titleFont: titleFont)
         
         // 自动消失
         if dismissInterval > 0.0 {
@@ -126,15 +155,38 @@ class QSHud: NSObject {
     /// 文字
     ///
     /// - Parameters:
-    ///   - title: 标题
     ///   - toView: 吐司加到哪个view上，nil加到window
+    ///   - title: 标题
     ///   - isNeedMaskLayer: 是否需要遮罩
-    ///   - dismissInterval: 消失时间，默认2.5秒
+    ///   - maskLayerColor: 遮罩颜色
+    ///   - toastViewColor: 吐司颜色
+    ///   - toastViewRadius: 吐司圆角
+    ///   - titleColor: 标题颜色
+    ///   - titleFont: 标题字体
+    ///   - dismissInterval: 消失时间
     ///   - dismissComplete: 消失后回调
-    func qs_showText(title: String, toView: UIView? = nil, isNeedMaskLayer: Bool = true, dismissInterval: TimeInterval = 2.5, dismissComplete: (() -> ())? = nil) {
+    func qs_showText(toView: UIView? = nil,
+                     title: String,
+                     isNeedMaskLayer: Bool = true,
+                     maskLayerColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                     toastViewColor: UIColor = .white,
+                     toastViewRadius: CGFloat = 10.0,
+                     titleColor: UIColor = .black,
+                     titleFont: UIFont = UIFont.systemFont(ofSize: 17.0),
+                     dismissInterval: TimeInterval = 2.5,
+                     dismissComplete: (() -> ())? = nil) {
         // 引用计数加一
         showCount += 1
-        qs_addHudView(toView: toView, img: nil, title: title, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: false, dismissComplete: dismissComplete)
+        qs_addHudView(toView: toView,
+                      img: nil,
+                      title: title,
+                      isNeedMaskLayer: isNeedMaskLayer,
+                      isImgRotate: false,
+                      maskLayerColor: maskLayerColor,
+                      toastViewColor: toastViewColor,
+                      toastViewRadius: toastViewRadius,
+                      titleColor: titleColor,
+                      titleFont: titleFont)
         
         // 自动消失
         if dismissInterval > 0.0 {
@@ -145,7 +197,13 @@ class QSHud: NSObject {
     }
     
     /// 消失
+    ///
+    /// - Parameter complete: 消失后回调
     func qs_dismiss(complete: (() -> ())? = nil) {
+        if showCount <= 0 {
+            return
+        }
+        
         showCount -= 1
         if showCount > 0 {
             if let block = complete {
@@ -160,28 +218,43 @@ class QSHud: NSObject {
         
         UIView.animate(withDuration: 0.35, animations: { [weak self] in
             self?.hudView.alpha = 0.0
-        }) { [weak self] _ in
+        }) { [weak self] isFinish in
             if let block = complete {
                 block()
             }
-            self?.hudView.removeFromSuperview()
-            self?.showCount = 0
+            
+            if isFinish {
+                self?.hudView.removeFromSuperview()
+            }
+            
+            if (self?.showCount ?? 0) < 0 {
+                self?.showCount = 0
+            }
         }
     }
     
     // MARK: - Private Methods
-    private func qs_addHudView(toView: UIView? = nil, img: String? = nil, title: String? = nil, isNeedMaskLayer: Bool, isImgRotate: Bool, dismissComplete: (() -> ())? = nil) {
+    /// 添加hudView
+    private func qs_addHudView(toView: UIView? = nil,
+                               img: String? = nil,
+                               title: String? = nil,
+                               isNeedMaskLayer: Bool,
+                               isImgRotate: Bool,
+                               maskLayerColor: UIColor? = nil,
+                               toastViewColor: UIColor? = nil,
+                               toastViewRadius: CGFloat? = nil,
+                               titleColor: UIColor? = nil,
+                               titleFont: UIFont? = nil) {
+        hudView.backgroundColor = maskLayerColor
         hudView.isNeedMaskLayer = isNeedMaskLayer
-        hudView.toastColor = toastViewColor
-        hudView.toastRadius = toastViewRadius
+        hudView.toastColor = toastViewColor ?? .white
+        hudView.toastRadius = toastViewRadius ?? 10.0
         hudView.iconImg = img ?? ""
         hudView.title = title ?? ""
-        hudView.titleFont = titleFont
-        hudView.titleColor = titleColor
+        hudView.titleFont = titleFont ?? UIFont.systemFont(ofSize: 17.0)
+        hudView.titleColor = titleColor ?? .black
         hudView.isImgRotate = isImgRotate
         
-        // 消失回调
-        hudDismissComplete = dismissComplete
         // 布局
         layoutHudView(hudView, toView: toView, isNeedMaskLayer: isNeedMaskLayer)
     }
@@ -208,17 +281,14 @@ class QSHud: NSObject {
                     make.right.bottom.lessThanOrEqualTo(-50.0)
                 }
             }
-            
-            if isNeedMaskLayer {
-                hudV.backgroundColor = maskLayerColor
-            }
-            // 显示动画
+            // 动画显示
             qs_showHudView(hudV)
         }
     }
     
-    /// 显示
+    /// 动画显示
     private func qs_showHudView(_ hudView: UIView) {
+        hudView.layer.removeAllAnimations()
         UIView.animate(withDuration: 0.35, animations: {
             hudView.alpha = 1.0
         })
@@ -226,18 +296,6 @@ class QSHud: NSObject {
     
     // MARK: - Property
     /// 配置项
-    // 遮罩颜色
-    private var maskLayerColor: UIColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-    // 吐司背景颜色
-    private var toastViewColor: UIColor = UIColor.white
-    // 吐司的圆角
-    private var toastViewRadius: CGFloat = 10.0
-    // title字体颜色
-    private var titleColor: UIColor = UIColor.black
-    // title字体大小
-    private var titleFont: UIFont = UIFont.systemFont(ofSize: 17.0)
-    // 吐司消失时间
-    private var dismissInterval: TimeInterval = 2.5
     // 加载中图片
     private var loadingImgName: String = "QSProgressHudBundle.bundle/icon_loading"
     // 成功图片
@@ -245,17 +303,11 @@ class QSHud: NSObject {
     // 失败图片
     private var errorImgName: String = "QSProgressHudBundle.bundle/icon_false"
     
-    // 消失完成时的回调
-    private var hudDismissComplete: (() -> ())?
     private var dismissTask: QSTask?
     
     // hudView
     private lazy var hudView: QSHudView = {
         let view = QSHudView.init(frame: .zero)
-        view.toastColor = toastViewColor
-        view.toastRadius = toastViewRadius
-        view.titleColor = titleColor
-        view.titleFont = titleFont
         return view
     }()
     

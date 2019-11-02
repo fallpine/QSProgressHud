@@ -99,6 +99,9 @@ class ViewController: UIViewController {
     
     @objc private func dismissView() {
         QSProgressHud.qs_dismiss()
+        QSProgressHud.qs_showSuccess(toView: nil, title: "showSuccess", isNeedMaskLayer: false, dismissInterval: 2.0) {
+            print("success view dismiss")
+        }
     }
 }
 

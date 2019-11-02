@@ -42,7 +42,6 @@ class QSHudView: UIView {
     }
     
     deinit {
-        print("deinit")
         self.imgView.layer.removeAnimation(forKey: "transform.rotation.z")
     }
     
