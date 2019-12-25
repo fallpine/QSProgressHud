@@ -92,7 +92,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func showInfo() {
-        QSProgressHud.qs_showInfo(toView: nil, title: "showInfo", isNeedMaskLayer: true, dismissInterval: 2.0) {
+        QSProgressHud.qs_showInfo(toView: nil, title: "showInfoshowInfoshowInfoshowInfoshowInfoshowInfoshowInfoshowInfo", isNeedMaskLayer: true, dismissInterval: 2.0) {
             print("info view dismiss")
         }
     }

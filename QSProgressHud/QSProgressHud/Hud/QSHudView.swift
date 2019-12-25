@@ -204,6 +204,7 @@ class QSHudView: UIView {
         lab.textColor = titleColor
         lab.font = titleFont
         lab.textAlignment = .center
+        lab.numberOfLines = 0
         return lab
     }()
 }
