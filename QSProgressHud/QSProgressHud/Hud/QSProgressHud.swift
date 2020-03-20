@@ -25,12 +25,13 @@ public class QSProgressHud {
                                       title: String? = nil,
                                       loadingImg: String? = nil,
                                       isNeedMaskLayer: Bool = true,
+                                      isImgRotate: Bool = true,
                                       maskLayerColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
                                       toastViewColor: UIColor = .white,
                                       toastViewRadius: CGFloat = 10.0,
                                       titleColor: UIColor = .black,
                                       titleFont: UIFont = UIFont.systemFont(ofSize: 17.0)) {
-        QSHud.shared.qs_showProgress(toView: toView, title: title, loadingImg: loadingImg, isNeedMaskLayer: isNeedMaskLayer, maskLayerColor: maskLayerColor, toastViewColor: toastViewColor, toastViewRadius: toastViewRadius, titleColor: titleColor, titleFont: titleFont)
+        QSHud.shared.qs_showProgress(toView: toView, title: title, loadingImg: loadingImg, isNeedMaskLayer: isNeedMaskLayer, isImgRotate: isImgRotate, maskLayerColor: maskLayerColor, toastViewColor: toastViewColor, toastViewRadius: toastViewRadius, titleColor: titleColor, titleFont: titleFont)
     }
 
     /// 成功
