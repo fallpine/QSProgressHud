@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class QSHudView: UIView {
     override init(frame: CGRect) {
@@ -154,7 +155,15 @@ class QSHudView: UIView {
                 let img1 = UIImage(named: name, in:  bundle, compatibleWith: nil)
                 imgView.image = img1
             } else {
-                imgView.image = UIImage.init(named: iconImg)
+                // gif图
+                if iconImg.hasSuffix(".gif") {
+                    if let path = Bundle.main.path(forResource: iconImg, ofType:"") {
+                        let url = URL.init(fileURLWithPath: path)
+                        imgView.kf.setImage(with: ImageResource.init(downloadURL: url))
+                    }
+                } else {
+                    imgView.image = UIImage.init(named: iconImg)
+                }
             }
             
             imgView.snp.remakeConstraints { (make) in
