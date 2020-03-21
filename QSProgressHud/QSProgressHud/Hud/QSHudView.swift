@@ -159,7 +159,9 @@ class QSHudView: UIView {
                 if iconImg.hasSuffix(".gif") {
                     if let path = Bundle.main.path(forResource: iconImg, ofType:"") {
                         let url = URL.init(fileURLWithPath: path)
-                        imgView.kf.setImage(with: ImageResource.init(downloadURL: url))
+                        DispatchQueue.main.async { [weak self] in
+                            self?.imgView.kf.setImage(with: ImageResource.init(downloadURL: url))
+                        }
                     }
                 } else {
                     imgView.image = UIImage.init(named: iconImg)
