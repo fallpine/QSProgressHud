@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041DA1752519D93E00ECD227 /* QSHudContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA1742519D93E00ECD227 /* QSHudContentView.swift */; };
+		041DA1782519D9F500ECD227 /* QSImageAndTitleHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA1772519D9F500ECD227 /* QSImageAndTitleHudView.swift */; };
+		041DA17B2519F06000ECD227 /* QSLoadingHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA17A2519F06000ECD227 /* QSLoadingHudView.swift */; };
+		041DA17F2519F98900ECD227 /* QSGifHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DA17E2519F98900ECD227 /* QSGifHudView.swift */; };
+		04321B39251AE9A200140E46 /* QSGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04321B38251AE9A200140E46 /* QSGifView.swift */; };
 		0477030C22EE9DE100A331FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477030B22EE9DE100A331FE /* AppDelegate.swift */; };
 		0477030E22EE9DE100A331FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477030D22EE9DE100A331FE /* ViewController.swift */; };
 		0477031122EE9DE100A331FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0477030F22EE9DE100A331FE /* Main.storyboard */; };
 		0477031322EE9DE200A331FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0477031222EE9DE200A331FE /* Assets.xcassets */; };
 		0477031622EE9DE200A331FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0477031422EE9DE200A331FE /* LaunchScreen.storyboard */; };
-		0477032122EE9E2800A331FE /* QSHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477031E22EE9E2800A331FE /* QSHud.swift */; };
-		0477032222EE9E2800A331FE /* QSHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477031F22EE9E2800A331FE /* QSHudView.swift */; };
 		0477032322EE9E2800A331FE /* QSDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477032022EE9E2800A331FE /* QSDispatch.swift */; };
 		0477032522EEAC5F00A331FE /* QSProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477032422EEAC5F00A331FE /* QSProgressHud.swift */; };
 		04AAB06A22F0314C00F51AA4 /* QSProgressHudBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */; };
@@ -21,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041DA1742519D93E00ECD227 /* QSHudContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSHudContentView.swift; sourceTree = "<group>"; };
+		041DA1772519D9F500ECD227 /* QSImageAndTitleHudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSImageAndTitleHudView.swift; sourceTree = "<group>"; };
+		041DA17A2519F06000ECD227 /* QSLoadingHudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSLoadingHudView.swift; sourceTree = "<group>"; };
+		041DA17E2519F98900ECD227 /* QSGifHudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSGifHudView.swift; sourceTree = "<group>"; };
+		04321B38251AE9A200140E46 /* QSGifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSGifView.swift; sourceTree = "<group>"; };
 		0477030822EE9DE100A331FE /* QSProgressHud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QSProgressHud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0477030B22EE9DE100A331FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0477030D22EE9DE100A331FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,8 +36,6 @@
 		0477031222EE9DE200A331FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0477031522EE9DE200A331FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0477031722EE9DE200A331FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0477031E22EE9E2800A331FE /* QSHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSHud.swift; sourceTree = "<group>"; };
-		0477031F22EE9E2800A331FE /* QSHudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSHudView.swift; sourceTree = "<group>"; };
 		0477032022EE9E2800A331FE /* QSDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSDispatch.swift; sourceTree = "<group>"; };
 		0477032422EEAC5F00A331FE /* QSProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSProgressHud.swift; sourceTree = "<group>"; };
 		04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = QSProgressHudBundle.bundle; sourceTree = "<group>"; };
@@ -87,8 +93,11 @@
 			children = (
 				04AAB06922F0314C00F51AA4 /* QSProgressHudBundle.bundle */,
 				0477032022EE9E2800A331FE /* QSDispatch.swift */,
-				0477031E22EE9E2800A331FE /* QSHud.swift */,
-				0477031F22EE9E2800A331FE /* QSHudView.swift */,
+				041DA1742519D93E00ECD227 /* QSHudContentView.swift */,
+				041DA1772519D9F500ECD227 /* QSImageAndTitleHudView.swift */,
+				041DA17A2519F06000ECD227 /* QSLoadingHudView.swift */,
+				041DA17E2519F98900ECD227 /* QSGifHudView.swift */,
+				04321B38251AE9A200140E46 /* QSGifView.swift */,
 				0477032422EEAC5F00A331FE /* QSProgressHud.swift */,
 			);
 			path = Hud;
@@ -227,12 +236,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041DA1752519D93E00ECD227 /* QSHudContentView.swift in Sources */,
+				041DA17F2519F98900ECD227 /* QSGifHudView.swift in Sources */,
 				0477030E22EE9DE100A331FE /* ViewController.swift in Sources */,
 				0477032322EE9E2800A331FE /* QSDispatch.swift in Sources */,
-				0477032122EE9E2800A331FE /* QSHud.swift in Sources */,
-				0477032222EE9E2800A331FE /* QSHudView.swift in Sources */,
+				041DA17B2519F06000ECD227 /* QSLoadingHudView.swift in Sources */,
 				0477032522EEAC5F00A331FE /* QSProgressHud.swift in Sources */,
 				0477030C22EE9DE100A331FE /* AppDelegate.swift in Sources */,
+				04321B39251AE9A200140E46 /* QSGifView.swift in Sources */,
+				041DA1782519D9F500ECD227 /* QSImageAndTitleHudView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +399,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSProgressHud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -408,7 +420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSProgressHud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
