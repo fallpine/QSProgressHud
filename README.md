@@ -8,82 +8,139 @@
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading.png" width="200"/>  <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/loading1.png" width="200"/>  <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/success.png" width="200"/>  
 <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/failure.png" width="200"/>  <img src="https://github.com/fallpine/QSProgressHud/blob/master/Screenshots/infoText.png" width="200"/>
 
+QSProgressHud是单例，使用时创建单例，再调用单例中的对应方法即可
 ```
-/// 设置配置项
-///
-/// - Parameters:
-///   - maskLayerColor: 遮罩层颜色
-///   - toastViewColor: 吐司颜色
-///   - toastViewRadius: 吐司圆角
-///   - titleColor: title颜色
-///   - titleFont: title字体
-///   - loadingImg: 加载中图片
-///   - successImg: 成功图片
-///   - errorImg: 失败图片
-///   - dismissInterval: 消失时间
-public class func qs_setConfiguration(maskLayerColor: UIColor? = nil,
-                                   toastViewColor: UIColor? = nil,
-                                   toastViewRadius:  CGFloat? = nil,
-                                   titleColor: UIColor? = nil,
-                                   titleFont: UIFont? = nil,
-                                   loadingImg: String? = nil,
-                                   successImg: String? = nil,
-                                   errorImg: String? = nil,
-                                   dismissInterval: TimeInterval? = nil)
-通过调用这个方法，可以自定义 遮罩层颜色、吐司颜色、title颜色、title字体、加载中图片、成功图片、失败图片、消失时间，其中 消失时间 对loading状态无效，加载中的状态只能通过手动调用dismiss方法才能关闭
+QSProgressHud.shared
+```
 
+相关方法：
+```
 /// 加载中
 ///
 /// - Parameters:
-///   - toView: 吐司加到哪个view上，nil加到window
+///   - view: 吐司加到哪个view上，nil加到window
+///   - loadingImg: 加载中图片
+///   - isMask: 是否需要遮罩
+///   - maskColor: 遮罩层颜色
+///   - toastColor: 吐司颜色
+///   - toastRadius: 吐司圆角
 ///   - title: 标题
-///   - isNeedMaskLayer: 是否需要遮罩
-public class func qs_showProgress(toView: UIView? = nil,
-                               title: String? = nil,
-                               isNeedMaskLayer: Bool = true)
-                               
+///   - titleColor: 标题颜色
+///   - titleFont: 标题字体
+public func qs_showProgress(to view: UIView? = nil,
+                         loadingImg: String? = nil,
+                         isMask: Bool = true,
+                         maskColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                         toastColor: UIColor = .white,
+                         toastRadius: CGFloat = 10.0,
+                         title: String? = nil,
+                         titleColor: UIColor = .black,
+                         titleFont: UIFont = UIFont.systemFont(ofSize: 14.0))
+                         
 /// 成功
 ///
 /// - Parameters:
-///   - toView: 吐司加到哪个view上，nil加到window
+///   - view: 吐司加到哪个view上，nil加到window
+///   - successImg: 成功图片
+///   - isMask: 是否需要遮罩
+///   - maskColor: 遮罩颜色
+///   - toastColor: 吐司颜色
+///   - toastRadius: 吐司圆角
 ///   - title: 标题
-///   - isNeedMaskLayer: 是否需要遮罩
-///   - dismissInterval: 消失时间，默认2.5秒
-///   - dismissComplete: 消失后回调
-public class func qs_showSuccess(toView: UIView? = nil,
+///   - titleColor: 标题颜色
+///   - titleFont: 标题字体
+///   - interval: 显示时长
+///   - dismiss: 消失回调
+public func qs_showSuccess(to view: UIView? = nil,
+                        successImg: String? = nil,
+                        isMask: Bool = true,
+                        maskColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                        toastColor: UIColor = .white,
+                        toastRadius: CGFloat = 10.0,
                         title: String? = nil,
-                        isNeedMaskLayer: Bool = true,
-                        dismissInterval: TimeInterval = 2.5,
-                        dismissComplete: (() -> ())? = nil)
-                        
+                        titleColor: UIColor = .black,
+                        titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
+                        interval: TimeInterval = 2.0,
+                        dismiss: (() -> ())? = nil)
+
 /// 失败
 ///
 /// - Parameters:
-///   - toView: 吐司加到哪个view上，nil加到window
+///   - view: 吐司加到哪个view上，nil加到window
+///   - errorImg: 错误图片
+///   - isMask: 是否需要遮罩
+///   - maskColor: 遮罩颜色
+///   - toastColor: 吐司颜色
+///   - toastRadius: 吐司圆角
 ///   - title: 标题
-///   - isNeedMaskLayer: 是否需要遮罩
-///   - dismissInterval: 消失时间，默认2.5秒
-///   - dismissComplete: 消失后回调
-public class func qs_showFailure(toView: UIView? = nil,
+///   - titleColor: 标题颜色
+///   - titleFont: 标题字体
+///   - interval: 显示时长
+///   - dismiss: 消失回调
+public func qs_showError(to view: UIView? = nil,
+                      errorImg: String? = nil,
+                      isMask: Bool = true,
+                      maskColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                      toastColor: UIColor = .white,
+                      toastRadius: CGFloat = 10.0,
                       title: String? = nil,
-                      isNeedMaskLayer: Bool = true,
-                      dismissInterval: TimeInterval = 2.5,
-                      dismissComplete: (() -> ())? = nil)
-                      
+                      titleColor: UIColor = .black,
+                      titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
+                      interval: TimeInterval = 2.0,
+                      dismiss: (() -> ())? = nil)
+
 /// 文字
 ///
 /// - Parameters:
-///   - toView: 吐司加到哪个view上，nil加到window
+///   - view: 吐司加到哪个view上，nil加到window
+///   - isMask: 是否需要遮罩
+///   - maskColor: 遮罩颜色
+///   - toastColor: 吐司颜色
+///   - toastRadius: 吐司圆角
 ///   - title: 标题
-///   - isNeedMaskLayer: 是否需要遮罩
-///   - dismissInterval: 消失时间，默认2.5秒
-///   - dismissComplete: 消失后回调
-public class func qs_showInfo(toView: UIView? = nil,
+///   - titleColor: 标题颜色
+///   - titleFont: 标题字体
+///   - interval: 显示时长
+///   - dismiss: 消失后回调
+public func qs_showText(to view: UIView? = nil,
+                     isMask: Bool = true,
+                     maskColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                     toastColor: UIColor = .white,
+                     toastRadius: CGFloat = 10.0,
                      title: String,
-                     isNeedMaskLayer: Bool = true,
-                     dismissInterval: TimeInterval = 2.5,
-                     dismissComplete: (() -> ())? = nil)
-                     
+                     titleColor: UIColor = .black,
+                     titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
+                     interval: TimeInterval = 2.0,
+                     dismiss: (() -> ())? = nil)
+
+/// gif
+///
+/// - Parameters:
+///   - view: 吐司加到哪个view上，nil加到window
+///   - gifUrl: 成功图片
+///   - isLocalGif: 是否是本地的gif图片
+///   - isMask: 是否需要遮罩
+///   - maskColor: 遮罩颜色
+///   - toastColor: 吐司颜色
+///   - toastRadius: 吐司圆角
+///   - title: 标题
+///   - titleColor: 标题颜色
+///   - titleFont: 标题字体
+///   - interval: 显示时长
+///   - dismiss: 消失回调
+public func qs_showGif(to view: UIView? = nil,
+                        gifUrl: URL,
+                        isLocalGif: Bool,
+                        isMask: Bool = true,
+                        maskColor: UIColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5),
+                        toastColor: UIColor = .white,
+                        toastRadius: CGFloat = 10.0,
+                        title: String? = nil,
+                        titleColor: UIColor = .black,
+                        titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
+                        interval: TimeInterval = 2.0,
+                        dismiss: (() -> ())? = nil)
+                               
 /// 消失
-public class func qs_dismiss()
+public func qs_dismiss()
 ```
