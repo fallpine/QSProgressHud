@@ -64,7 +64,7 @@ class QSHudContentView: UIView {
     /// 显示
     /// - Parameters:
     ///   - view: 父视图
-    ///   - interval: 显示时间
+    ///   - interval: 显示时间，nil标识一直显示
     ///   - dismiss: 消失时回调
     func showHudView(to view: UIView?, interval: TimeInterval?, dismiss: (() -> ())?) {
         self.alpha = 0.0

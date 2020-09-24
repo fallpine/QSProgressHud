@@ -77,7 +77,7 @@ public class QSProgressHud {
                         title: String? = nil,
                         titleColor: UIColor = .black,
                         titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
-                        interval: TimeInterval = 2.0,
+                        interval: TimeInterval? = 2.0,
                         dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
         qs_dismiss()
@@ -116,7 +116,7 @@ public class QSProgressHud {
                       title: String? = nil,
                       titleColor: UIColor = .black,
                       titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
-                      interval: TimeInterval = 2.0,
+                      interval: TimeInterval? = 2.0,
                       dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
         qs_dismiss()
@@ -153,7 +153,7 @@ public class QSProgressHud {
                      title: String,
                      titleColor: UIColor = .black,
                      titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
-                     interval: TimeInterval = 2.0,
+                     interval: TimeInterval? = 2.0,
                      dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
         qs_dismiss()
@@ -192,7 +192,7 @@ public class QSProgressHud {
                         title: String? = nil,
                         titleColor: UIColor = .black,
                         titleFont: UIFont = UIFont.systemFont(ofSize: 14.0),
-                        interval: TimeInterval = 2.0,
+                        interval: TimeInterval? = 2.0,
                         dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
         qs_dismiss()
