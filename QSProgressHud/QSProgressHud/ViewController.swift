@@ -129,7 +129,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func dismissView() {
-        QSProgressHud.shared.qs_dismiss()
+        QSProgressHud.shared.qs_dismiss(animated: true)
     }
 }
 

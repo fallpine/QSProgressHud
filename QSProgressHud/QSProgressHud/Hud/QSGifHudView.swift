@@ -75,8 +75,6 @@ class QSGifHudView: QSHudContentView {
                 }
             })
         }
-        
-        
     }
     
     // MARK: - Widget

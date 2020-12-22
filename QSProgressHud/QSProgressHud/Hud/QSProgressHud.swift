@@ -40,7 +40,7 @@ public class QSProgressHud {
                          titleColor: UIColor = .black,
                          titleFont: UIFont = UIFont.systemFont(ofSize: 14.0)) {
         // 把之前显示的hud隐藏掉
-        qs_dismiss()
+        qs_dismiss(animated: false)
         
         let img = loadingImg == nil ? loadingImgName : loadingImg
         
@@ -80,7 +80,7 @@ public class QSProgressHud {
                         interval: TimeInterval? = 2.0,
                         dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
-        qs_dismiss()
+        qs_dismiss(animated: false)
         
         let img = successImg == nil ? successImgName : successImg
         
@@ -119,7 +119,7 @@ public class QSProgressHud {
                       interval: TimeInterval? = 2.0,
                       dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
-        qs_dismiss()
+        qs_dismiss(animated: false)
         
         let img = errorImg == nil ? errorImgName : errorImg
         
@@ -156,7 +156,7 @@ public class QSProgressHud {
                      interval: TimeInterval? = 2.0,
                      dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
-        qs_dismiss()
+        qs_dismiss(animated: false)
         
         let hudView = QSImageAndTitleHudView.init(frame: .zero)
         self.hudView = hudView
@@ -195,7 +195,7 @@ public class QSProgressHud {
                         interval: TimeInterval? = 2.0,
                         dismiss: (() -> ())? = nil) {
         // 把之前显示的hud隐藏掉
-        qs_dismiss()
+        qs_dismiss(animated: false)
         
         let hudView = QSGifHudView.init(frame: .zero)
         self.hudView = hudView
@@ -207,8 +207,8 @@ public class QSProgressHud {
     }
     
     /// 消失
-    public func qs_dismiss() {
-        hudView?.dismiss()
+    public func qs_dismiss(animated: Bool = true) {
+        hudView?.dismiss(animated: animated)
         hudView = nil
     }
     

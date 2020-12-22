@@ -73,7 +73,7 @@ class QSHudContentView: UIView {
         // 显示时间
         if let showTime = interval {
             dismissTask = QSDispatch.qs_delay(showTime) { [weak self] in
-                self?.dismiss()
+                self?.dismiss(animated: true)
             }
         }
         
@@ -109,7 +109,11 @@ class QSHudContentView: UIView {
     }
     
     /// 消失
-    func dismiss() {
+    func dismiss(animated: Bool) {
+        if !animated {
+            backgroundColor = .clear
+        }
+        
         UIView.animate(withDuration: 0.35, animations: { [weak self] in
             self?.alpha = 0.0
         }) { [weak self] _ in
@@ -118,6 +122,7 @@ class QSHudContentView: UIView {
                 QSDispatch.qs_cancle(self?.dismissTask)
                 block()
             }
+            self?.dismissBlock = nil
             self?.removeFromSuperview()
         }
     }
