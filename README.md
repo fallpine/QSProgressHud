@@ -142,5 +142,8 @@ public func qs_showGif(to view: UIView? = nil,
                         dismiss: (() -> ())? = nil)
                                
 /// 消失
-public func qs_dismiss()
+public func qs_dismiss(animated: Bool = true)
 ```
+
+#### 版本更新
+2.0.0版本之后需要使用iOS11才能使用，如果需要支持iOS11之前版本，可使用2.0.0之前版本
