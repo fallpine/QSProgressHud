@@ -1,3 +1,5 @@
+后来重写了一个弹框QSToastView，建议直接使用QSToastView，pod 'QSToastView'
+
 # QSProgressHud
 这是一个，加载、成功、失败、文字的提示框工具
 
