@@ -15,6 +15,7 @@ class QSHudContentView: UIView {
         
         self.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         self.addSubview(toastContentView)
+        
         toastContentView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
             make.top.left.greaterThanOrEqualTo(80.0)
